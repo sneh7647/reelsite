@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+{% load static %}
+
+   <!-- Mobile Viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <title>Reels</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- CSS FILE -->
+    <link rel="stylesheet"
+          href="{% static 'reels/css/style.css' %}">
+        
+</head>
+<body>
+
+<div class="app-container">
+
+{% for reel in reels %}
+
+<div class="reel" data-id="{{ reel.id }}">
+
+   <video src="{{ reel.video.url }}" playsinline muted></video>
+
+    {% comment %} <div class="view-container">
+        <span class="view-icon">👁</span>
+        <span class="view-count">{{ reel.total_views }}</span>
+        <span class="view-text">views</span>
+    </div> {% endcomment %}
+    
+    <!-- Play Button -->
+    <div class="play-btn">▶</div>
+
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar"></div>
+    </div>
+
+     <!-- Right Side Icons -->
+    <div class="overlay">
+
+
+        <!-- ❤️ Like Section -->
+        <div class="like-container">
+            <button onclick="likeReel({{ reel.id }}, this)" class="like-btn">
+                ❤️
+            </button>
+            <p class="like-count">{{ reel.total_likes }}</p>
+        </div>
+
+        <!-- 🔊 Sound Controls -->
+        <button class="mute-btn">
+            <i class="fa-solid fa-volume-high"></i>
+        </button>
+    
+    </div>
+
+</div>
+{% endfor %}
+
+</div>
+
+<!-- JS FILE -->
+<script src="{% static 'reels/js/script.js' %}"></script>
+
+</body>
+</html>
